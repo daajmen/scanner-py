@@ -7,17 +7,15 @@ import time
 print("Startar barcode-scanning... (Ctrl+C för att avsluta)")
 while True:
     result = subprocess.run(
-        ["libcamera-still", "-n", "--width", "640", "--height", "480", "--format", "jpeg", "--output", "-"],
+        ["libcamera-jpeg", "-n", "-o", "-"],
         stdout=subprocess.PIPE
     )
 
-    img = Image.open(io.BytesIO(result.stdout))
-    barcodes = decode(img)
-
-    if barcodes:
-        for barcode in barcodes:
+    try:
+        img = Image.open(io.BytesIO(result.stdout))
+        for barcode in decode(img):
             print("Avläst:", barcode.data.decode("utf-8"))
-    else:
-        print("Ingen streckkod hittad.")
+    except Exception as e:
+        print("Fel vid bildavläsning:", e)
 
     time.sleep(5)
