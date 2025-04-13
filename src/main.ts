@@ -1,12 +1,16 @@
 import { BrowserMultiFormatReader } from '@zxing/browser';
 
-const video = document.getElementById('video') as HTMLVideoElement;
+const video = document.createElement('video');
+video.setAttribute('autoplay', 'true');
+video.setAttribute('width', '300');
+video.setAttribute('height', '200');
+document.body.appendChild(video);
+
 const reader = new BrowserMultiFormatReader();
 
 reader.decodeFromVideoDevice(undefined, video, (result, err) => {
   if (result) {
-    console.log(result.getText());
     alert('Barcode: ' + result.getText());
-    reader.reset();
+    reader.reset(); // Stop scanning efter första träffen
   }
 });
