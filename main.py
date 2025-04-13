@@ -21,4 +21,4 @@ while True:
     except Exception as e:
         print("Fel vid bildavläsning:", e)
 
-    time.sleep(5)
+    time.sleep(2)
