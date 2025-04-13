@@ -7,7 +7,7 @@ import time
 print("Startar barcode-scanning... (Ctrl+C för att avsluta)")
 while True:
     result = subprocess.run(
-        ["libcamera-still", "-n", "--width", "640", "--height", "480", "--encoding", "jpeg", "--output", "-"],
+        ["libcamera-still", "-n", "--width", "640", "--height", "480", "--format", "jpeg", "--output", "-"],
         stdout=subprocess.PIPE
     )
 
